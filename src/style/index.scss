@@ -1,0 +1,79 @@
+@use './reset.scss';
+@use './colors.scss' as color;
+@use './typo.scss';
+
+body {
+    height: 100vh;
+    width: 100vw;
+
+    main {
+        height: 100%;
+        width: 100%;
+        
+        display: grid;
+        grid-template-columns: repeat(30, 1fr);
+        grid-template-rows: repeat(14, 1fr);
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+            
+        div#mainBox {
+            display: flex;
+            justify-content: center;
+            grid-area: 1 / 1 / 10 / 19;
+
+            position: relative;
+
+            background-color: rgb(182, 39, 39);
+
+            header {
+                width: 85%;
+
+                position: absolute;
+                top: 9%;
+
+                display: flex;
+                justify-content: left;
+                align-items: center;
+                gap: 10%;
+
+                background-color: rgba(242, 12, 161, 0.273);
+
+                div.logoContainer {
+                    h1.logo {
+                        font-family: typo.$logo_font;
+                        font-weight: typo.$logo_weight;
+                        font-size: typo.$size;
+
+                        color: color.$black;
+                    }
+                }
+            }
+
+            img.mainbox_img {
+                width: 100%;
+            }
+        }
+
+        div.sideTextContainer {
+            grid-area: 1 / 19 / 8 / 31;
+        }
+        div.carousselArrowsContainer {
+            grid-area: 8 / 19 / 10 / 31;
+
+            background-color: rgb(37, 232, 229);
+        }
+        div.infoContainer {
+            grid-area: 10 / 10 / 15 / 22;
+
+            background-color: rgba(80, 186, 37, 0.729);
+        }
+        div.smallArticleImgContainer {
+            .smallArticleImgContainer__left {
+                grid-area: 10 / 1 / 15 / 10;
+            }
+            .smallArticleImgContainer__right {
+                grid-area: 10 / 22 / 15 / 31;
+            } 
+        }
+    }
+}
