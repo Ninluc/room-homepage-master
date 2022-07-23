@@ -25,4 +25,4 @@ design/
 
 # Others
 *~
-build/
+dist/
