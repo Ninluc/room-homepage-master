@@ -15,6 +15,10 @@ body {
         grid-template-rows: repeat(14, 1fr);
         grid-column-gap: 0px;
         grid-row-gap: 0px;
+
+        > * {
+            background-color: color.$white;
+        }
             
         div#mainBox {
             display: flex;
@@ -23,34 +27,94 @@ body {
 
             position: relative;
 
-            background-color: rgb(182, 39, 39);
+            overflow-y: hidden;
 
             header {
                 width: 85%;
 
                 position: absolute;
-                top: 9%;
+                top: 12%;
 
                 display: flex;
                 justify-content: left;
                 align-items: center;
-                gap: 10%;
+                gap: 7%;
 
-                background-color: rgba(242, 12, 161, 0.273);
+                z-index: 15;
+                
+                nav {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: flex-start;
+                    gap: 2.5vw;
 
-                div.logoContainer {
+                    // * {
+                    //     height: min-content;
+                    // }
+                    
                     h1.logo {
-                        font-family: typo.$logo_font;
-                        font-weight: typo.$logo_weight;
-                        font-size: typo.$size;
+                        margin: 0;
+                        margin-right: 1vw;
 
-                        color: color.$black;
+                        padding: 0;
+    
+                        font-family: typo.$font;
+                        font-weight: typo.$logo_weight;
+                        font-size: typo.$logo_size;
+    
+                        color: color.$white;
+
+                        transform: translateY(-11px);
+                    }
+
+                    a.navLinks {
+                        position: relative;
+
+                        display: flex;
+                        justify-content: center;
+                        
+                        font-family: typo.$font;
+                        font-weight: typo.$link_weight;
+                        font-size: typo.$link_size;
+
+                        color: color.$white;
+                        text-decoration: none;
+                        text-transform: lowercase;
+
+                        &::after {
+                            content: "";
+
+                            position: absolute;
+                            bottom: -10px;
+
+                            width: 50%;
+                            height: 2px;
+
+                            background-color: color.$white;
+
+                            // Before hover
+                            transform: translateY(-10px) scaleX(0);
+                            opacity: 0;
+                            
+                            transition: transform 0.3s ease-out, opacity 0.2s ease-out;
+                        }
+
+                        &:hover::after {
+                            transform: translateY(0px) scaleX(1);
+                            opacity: 1;
+                        }
                     }
                 }
             }
 
             img.mainbox_img {
                 width: 100%;
+                height: fit-content;
+
+                position: absolute;
+                top: 0px;
+
+                z-index: 10;
             }
         }
 
@@ -65,13 +129,13 @@ body {
         div.infoContainer {
             grid-area: 10 / 10 / 15 / 22;
 
-            background-color: rgba(80, 186, 37, 0.729);
+            // background-color: rgba(80, 186, 37, 0.729);
         }
         div.smallArticleImgContainer {
-            .smallArticleImgContainer__left {
+            &.smallArticleImgContainer__left {
                 grid-area: 10 / 1 / 15 / 10;
             }
-            .smallArticleImgContainer__right {
+            &.smallArticleImgContainer__right {
                 grid-area: 10 / 22 / 15 / 31;
             } 
         }
