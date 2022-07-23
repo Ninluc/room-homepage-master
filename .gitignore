@@ -26,3 +26,5 @@ design/
 # Others
 *~
 dist/
+*.md
+.cache/
