@@ -28,3 +28,4 @@ design/
 dist/
 *.md
 .cache/
+.parcelrc
