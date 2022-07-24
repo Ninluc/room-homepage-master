@@ -2,6 +2,7 @@
 @use './colors.scss' as color;
 @use './typo.scss';
 @use './misc.scss';
+@use './index__phone.scss';
 
 body {
     // height: 100vh;
@@ -34,7 +35,7 @@ body {
                 width: 85%;
 
                 position: absolute;
-                top: 12%;
+                top: 15%;
 
                 display: flex;
                 justify-content: left;
@@ -260,14 +261,11 @@ body {
                     img {
 
                     }
-                    &:hover {
+                    &:hover, &:focus-visible {
                         background-color: color.$very_dark_gray;
                     }
                     &:active {
                         background-color: color.$dark_gray;
-                    }
-                    &:focus {
-
                     }
                 }
             }
@@ -276,19 +274,49 @@ body {
 
 
         div.infoContainer {
+            padding: 3vw;
+            padding-top: 3vw + 1vw;
+            
             grid-area: 10 / 10 / 15 / 22;
 
-            // background-color: rgba(80, 186, 37, 0.729);
+            h3 {
+                font-family: typo.$font;
+                font-size: typo.$smallTitle_size;
+                font-weight: typo.$smallTitle_weight;
+
+                text-transform: typo.$smallTitle_transform;
+                
+                letter-spacing: typo.$smallTitle_spacing;
+            }
+
+            p {
+                font-family: typo.$font;
+                font-size: typo.$text_size;
+                font-weight: typo.$text_weight;
+
+                line-height: 30px;
+
+                color: color.$dark_gray;
+            }
         }
 
 
 
         div.smallArticleImgContainer {
+            background-repeat: no-repeat;
+            background-size: cover;
+
             &.smallArticleImgContainer__left {
                 grid-area: 10 / 1 / 15 / 10;
+
+                background-image: url("../images/image-about-dark.jpg");
+                background-position: 10% 50%;
             }
             &.smallArticleImgContainer__right {
                 grid-area: 10 / 22 / 15 / 31;
+
+                background-image: url("../images/image-about-light.jpg");
+                background-position: 50% 50%;
             } 
         }
     }
