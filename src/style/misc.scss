@@ -1,6 +1,0 @@
-@use './colors.scss' as color;
-
-::selection {
-    background-color: color.$black;
-    color: color.$white;
-}
