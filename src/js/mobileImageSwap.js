@@ -3,7 +3,7 @@ import cc from "./carousselConfig.json";
 const MOBILE_BREAKPOINT = 900
 
 const swap = () => {
-    if (screen.width <= MOBILE_BREAKPOINT) {
+    // if (screen.width <= MOBILE_BREAKPOINT) {
         var imgs = document.getElementsByClassName("articleImg")
 
         for (var img of imgs) {
@@ -17,13 +17,20 @@ const swap = () => {
             else {
                 var href = img.src.split('/')[img.src.split('/').length - 1]
 
-                img.src = cc.defaultImgFolder + href.replace("desktop", "mobile")
+                if (screen.width <= 450) {
+                    href = href.replace("desktop", "mobile")
+                }
+                else {
+                    href = href.replace("mobile", "desktop")
+                }
+
+                img.src = cc.defaultImgFolder + href
             }
             // console.log("🚀 ~ file: mobileImageSwap.js ~ line 12 ~ swap ~ href", href);
         }
-    }
+    // }
 }
 
 swap()
 
-module.exports = { MOBILE_BREAKPOINT }
+module.exports = { MOBILE_BREAKPOINT, swap }

@@ -18,11 +18,16 @@ body {
         grid-column-gap: 0px;
         grid-row-gap: 0px;
 
+        overflow-y: scroll;
+        
         > * {
             background-color: color.$white;
         }
-            
+        
         div#mainBox {
+            $hamburgerDimensions : 30px;
+            $menuTransition : .3s;
+
             display: flex;
             justify-content: center;
             grid-area: 1 / 1 / 10 / 19;
@@ -30,7 +35,7 @@ body {
             position: relative;
 
             overflow-y: hidden;
-
+            
             header {
                 width: 85%;
 
@@ -50,6 +55,8 @@ body {
                     align-items: flex-start;
                     gap: 2.5vw;
 
+                    position: relative;
+
                     // * {
                     //     height: min-content;
                     // }
@@ -67,56 +74,161 @@ body {
                         color: color.$white;
 
                         transform: translateY(-11px);
-                    }
 
-                    a.navLinks {
-                        position: relative;
+                        transition: opacity $menuTransition ease-out;
 
-                        display: flex;
-                        justify-content: center;
-                        
-                        font-family: typo.$font;
-                        font-weight: typo.$link_weight;
-                        font-size: typo.$link_size;
-
-                        color: color.$white;
-                        text-decoration: none;
-                        text-transform: lowercase;
-
-                        &::after {
-                            content: "";
-
-                            position: absolute;
-                            bottom: -10px;
-
-                            width: 50%;
-                            height: 2px;
-
-                            background-color: color.$white;
-
-                            // Before hover
-                            transform: translateY(-10px) scaleX(0);
+                        &.logo__invisible {
                             opacity: 0;
-                            
-                            transition: transform 0.3s ease-out, opacity 0.2s ease-out;
-                        }
-
-                        &:hover::after, &:focus::after {
-                            transform: translateY(0px) scaleX(1);
-                            opacity: 1;
                         }
                     }
+
+                    div.hamburgerIcon {
+                        width: $hamburgerDimensions;
+                        height: $hamburgerDimensions;
+
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+
+                        background-image: url("../images/icon-hamburger.svg");
+                        background-position: center;
+                        background-repeat: no-repeat;
+                        background-size: auto 90%;
+
+                        cursor: pointer;
+                        
+                        z-index: 17;
+
+                        &.hamburger__close {
+                            background-image: url("../images/icon-close.svg") !important;
+
+                            animation: flick $menuTransition;
+                            @keyframes flick {
+                                from {
+                                    opacity: 1;
+                                }
+                                50% {
+                                    opacity: 0;
+                                }
+                                to {
+                                    opacity: 1;
+                                } 
+                            }
+                        }
+                    }
+
                 }
             }
+            
 
-            img.mainbox_img {
+            
+            img.mainbox_img.articleImg {
                 width: 100%;
                 height: fit-content;
 
                 position: absolute;
                 top: 0px;
 
-                z-index: 10;
+                &.activeSlide {
+                    z-index: 10;
+                }
+
+                &.newSlide {
+                    z-index: 9;
+                }
+            }
+
+
+
+            a.navLinks {
+                position: relative;
+
+                display: flex;
+                justify-content: center;
+                
+                font-family: typo.$font;
+                font-weight: typo.$link_weight;
+                font-size: typo.$link_size;
+
+                color: color.$white;
+                text-decoration: none;
+                text-transform: lowercase;
+
+                &::after {
+                    content: "";
+
+                    position: absolute;
+                    bottom: -10px;
+
+                    width: 50%;
+                    height: 2px;
+
+                    background-color: color.$white;
+
+                    // Before hover
+                    transform: translateY(-10px) scaleX(0);
+                    opacity: 0;
+                    
+                    transition: transform 0.3s ease-out, opacity 0.2s ease-out;
+                }
+
+                &:hover::after, &:focus::after {
+                    transform: translateY(0px) scaleX(1);
+                    opacity: 1;
+                }
+            }
+
+            div.menu {
+                width: 100%;
+                height: calc(30% + $hamburgerDimensions);
+
+                padding-left: 20%;
+
+                position: absolute;
+                top: 0;
+                left: 0;
+
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+
+                background-color: color.$white;
+
+                transform: translateY(-100%);
+
+                transition: transform $menuTransition ease-in-out, opacity $menuTransition ease-out;
+                opacity: 0;
+                
+                z-index: 12;
+
+                a.navLinks {
+                    font-size: typo.$link_size + 6px;
+                    
+                    color: color.$black;
+
+                    &::after {
+                        background-color: color.$black;
+                    }
+                }
+
+                &.menu__opened {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+
+                // &::after {
+                //     content: "";
+                //     width: 100%;
+                //     height: 90vh;
+                    
+                //     position: fixed;
+                //     bottom: -90vh;
+                //     left: 0;
+
+                //     background-color: rgb(220, 42, 42);
+
+                //     z-index: 30;
+                // }
             }
         }
 
@@ -131,8 +243,10 @@ body {
 
             grid-area: 1 / 19 / 10 / 31;
 
+            overflow-x: hidden;
+            
             h2 {
-                margin-bottom: (53.95px / 2);
+                margin-bottom: calc(53.95px / 2);
 
                 font-family: typo.$font;
                 font-size: typo.$title_size;
@@ -246,6 +360,8 @@ body {
                 left: 0;
 
                 background-color: color.$black;
+
+                z-index: 10;
                 
                 button.carousselArrow {
                     width: $buttonSize;
@@ -259,8 +375,9 @@ body {
                     transition: background-color 0.1s ease-out;
 
                     img {
-
+                        height: 30%;
                     }
+
                     &:hover, &:focus-visible {
                         background-color: color.$very_dark_gray;
                     }
@@ -268,6 +385,36 @@ body {
                         background-color: color.$dark_gray;
                     }
                 }
+            }
+
+            &::after {
+                content: "";
+
+                width: 100%;
+                height: 100%;
+
+                position: absolute;
+                top: 0;
+                right: 0;
+
+                background-color: color.$white;
+
+                transform: translateX(100%);
+
+                z-index: 9;
+
+                @keyframes slide {
+                    from {
+                        transform: translateX(100%);
+                    }
+                    to {
+                        transform: translateX(-100%);
+                    }
+                }
+            }
+
+            &.play::after {
+                animation: slide 0.6s ease-in-out;
             }
         }
 
@@ -318,6 +465,32 @@ body {
                 background-image: url("../images/image-about-light.jpg");
                 background-position: 50% 50%;
             } 
+        }
+    }
+
+    div#cover {
+        content: "";
+        width: 100%;
+        // height: calc(100vh - (13.5vh + 30px));
+        height: 100vh;
+        
+        position: fixed;
+        bottom: 0;
+        left: 0;
+
+        z-index: 11;
+
+        opacity: 0;
+
+        user-select: none;
+        pointer-events: none;
+
+        transition: opacity 0.2s ease-in-out;
+
+        &.active {
+            pointer-events: all;
+            opacity: 1;
+            background-color: color.$very_dark_gray__transparent;
         }
     }
 }
