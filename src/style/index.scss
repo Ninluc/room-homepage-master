@@ -3,7 +3,7 @@
 @use './typo.scss';
 
 body {
-    height: 100vh;
+    // height: 100vh;
     width: 100vw;
 
     main {
@@ -99,7 +99,7 @@ body {
                             transition: transform 0.3s ease-out, opacity 0.2s ease-out;
                         }
 
-                        &:hover::after {
+                        &:hover::after, &:focus::after {
                             transform: translateY(0px) scaleX(1);
                             opacity: 1;
                         }
@@ -118,19 +118,170 @@ body {
             }
         }
 
-        div.sideTextContainer {
-            grid-area: 1 / 19 / 8 / 31;
-        }
-        div.carousselArrowsContainer {
-            grid-area: 8 / 19 / 10 / 31;
 
-            background-color: rgb(37, 232, 229);
+
+        div.sideTextContainer {
+            $padding: 6vw;
+            padding: 4vw 6vw;
+            padding-top: $padding + .1vw;
+
+            position: relative;
+
+            grid-area: 1 / 19 / 10 / 31;
+
+            h2 {
+                margin-bottom: (53.95px / 2);
+
+                font-family: typo.$font;
+                font-size: typo.$title_size;
+                font-weight: typo.$title_weight;
+
+                color: color.$black;
+            }
+
+            > p {
+                margin-top: 0;
+
+                font-family: typo.$font;
+                font-size: typo.$text_size;
+                font-weight: typo.$text_weight;
+
+                line-height: 30px;
+
+                color: color.$dark_gray;
+            }
+
+            
+            .actionLink {
+                width: 60%;
+
+                margin-bottom: 9vh;
+
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                
+                text-decoration: none;
+
+                $transitionTime: 0.3s;
+
+                p.shopNowText {
+                    font-family: typo.$font;
+                    font-size: typo.$shopNow_size;
+                    font-weight: typo.$shopNow_weight;
+
+                    color: color.$black;
+                    text-transform: uppercase;
+
+                    letter-spacing: 15px;
+
+                    transition: color ($transitionTime - 0.1s) ease-out;
+                }
+
+                div.arrow {
+                    width: 60px;
+                    $arrowHeight: 2px;
+                    height: $arrowHeight;
+
+                    position: relative;
+
+                    background-color: color.$black;
+
+                    $arrowTransition: background-color ($transitionTime - 0.1s) .1s ease-out;
+                    transition: $arrowTransition;
+
+                    &::after, &::before {
+                        content: "";
+
+                        width: 10px;
+                        height: $arrowHeight;
+
+                        position: absolute;
+                        right: 0;
+
+                        background-color: color.$black;
+                        transition: background-color ($transitionTime - 0.1s) .2s ease-out;
+                    }
+
+                    $rotate: 45deg;
+                    &::after {
+                        transform: rotate(-$rotate);
+                        transform-origin: right top;
+                    }
+                    &::before {
+                        transform: rotate($rotate);
+                        transform-origin: right bottom;
+                    }
+                }
+
+                &:hover, &:focus {
+                    p.shopNowText {
+                        color: color.$dark_gray;
+                    }
+
+                    div.arrow {
+                        background-color: color.$dark_gray;
+
+                        &::after, &::before {
+                            background-color: color.$dark_gray;
+                        }
+                    }
+                }
+            }
+
+            
+            div.carousselArrows {
+                $buttonSize: 100px;
+                width: $buttonSize * 2;
+                height: $buttonSize;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                
+                position: absolute;
+                bottom: 0;
+                left: 0;
+
+                background-color: color.$black;
+                
+                button.carousselArrow {
+                    width: $buttonSize;
+                    height: $buttonSize;
+
+                    background-color: color.$black;       
+                    border: none;             
+
+                    cursor: pointer;
+
+                    transition: background-color 0.1s ease-out;
+
+                    img {
+
+                    }
+                    &:hover {
+                        background-color: color.$very_dark_gray;
+                    }
+                    &:active {
+                        background-color: color.$dark_gray;
+                    }
+                    &:focus {
+
+                    }
+                }
+            }
         }
+
+
+
         div.infoContainer {
             grid-area: 10 / 10 / 15 / 22;
 
             // background-color: rgba(80, 186, 37, 0.729);
         }
+
+
+
         div.smallArticleImgContainer {
             &.smallArticleImgContainer__left {
                 grid-area: 10 / 1 / 15 / 10;
